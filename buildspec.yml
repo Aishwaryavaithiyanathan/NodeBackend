@@ -13,6 +13,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
+      - export DOCKER_BUILDKIT=0
       - docker build -t $REPOSITORY_URI:$IMAGE_TAG .
 
   post_build:
@@ -24,6 +25,8 @@ phases:
       - echo "[{\"name\":\"$CONTAINER_NAME\",\"imageUri\":\"$REPOSITORY_URI:$IMAGE_TAG\"}]" > imagedefinition.json
       - cat imagedefinition.json
       - ls -l imagedefinition.json
+      - pwd
+      - ls -R
 
 artifacts:
   files:
